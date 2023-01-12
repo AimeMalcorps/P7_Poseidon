@@ -7,9 +7,9 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "rulename")
 public class RuleName {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
+	
 	@Id
-	@NotBlank
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private String description;

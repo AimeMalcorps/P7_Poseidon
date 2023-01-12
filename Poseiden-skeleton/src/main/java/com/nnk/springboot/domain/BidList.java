@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "bidlist")
@@ -15,7 +14,7 @@ public class BidList {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Integer BidListId;
+	private Integer bidListId;
 	private String account;
 	private String type;
 	private Double bidQuantity;
@@ -23,16 +22,16 @@ public class BidList {
 	private Double bid;
 	private Double ask;
 	private String benchmark;
-	private Timestamp bidListDate;
+	private Date bidListDate;
 	private String commentary;
 	private String security;
 	private String status;
 	private String trader;
 	private String book;
 	private String creationName;
-	private Timestamp creationDate;
+	private Date creationDate;
 	private String revisionName;
-	private Timestamp revisionDate;
+	private Date revisionDate;
 	private String dealName;
 	private String dealType;
 	private String sourceListId;
@@ -51,10 +50,10 @@ public class BidList {
 	}
 	
 	public Integer getBidListId() {
-		return BidListId;
+		return bidListId;
 	}
 	public void setBidListId(Integer bidListId) {
-		BidListId = bidListId;
+		this.bidListId = bidListId;
 	}
 	public String getAccount() {
 		return account;
@@ -98,10 +97,10 @@ public class BidList {
 	public void setBenchmark(String benchmark) {
 		this.benchmark = benchmark;
 	}
-	public Timestamp getBidListDate() {
+	public Date getBidListDate() {
 		return bidListDate;
 	}
-	public void setBidListDate(Timestamp bidListDate) {
+	public void setBidListDate(Date bidListDate) {
 		this.bidListDate = bidListDate;
 	}
 	public String getCommentary() {
@@ -140,10 +139,10 @@ public class BidList {
 	public void setCreationName(String creationName) {
 		this.creationName = creationName;
 	}
-	public Timestamp getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Timestamp creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	public String getRevisionName() {
@@ -152,10 +151,10 @@ public class BidList {
 	public void setRevisionName(String revisionName) {
 		this.revisionName = revisionName;
 	}
-	public Timestamp getRevisionDate() {
+	public Date getRevisionDate() {
 		return revisionDate;
 	}
-	public void setRevisionDate(Timestamp revisionDate) {
+	public void setRevisionDate(Date revisionDate) {
 		this.revisionDate = revisionDate;
 	}
 	public String getDealName() {

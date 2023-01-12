@@ -3,14 +3,14 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 @Entity
 @Table(name = "trade")
 public class Trade {
-    // TODO: Map columns in data table TRADE with corresponding java fields
 	@Id
-	@NotBlank
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer tradeId;
 	
 	private String account;
@@ -20,15 +20,15 @@ public class Trade {
 	private Double buyPrice;
 	private Double sellPrice;
 	private String benchmark;
-	private Timestamp tradeDate;
+	private Date tradeDate;
 	private String security;
 	private String status;
 	private String trader;
 	private String book;
 	private String creationName;
-	private Timestamp creationDate;
+	private Date creationDate;
 	private String revisionName;
-	private Timestamp revisionDate;
+	private Date revisionDate;
 	private String dealName;
 	private String dealType;
 	private String sourceListId;
@@ -82,10 +82,10 @@ public class Trade {
 	public void setBenchmark(String benchmark) {
 		this.benchmark = benchmark;
 	}
-	public Timestamp getTradeDate() {
+	public Date getTradeDate() {
 		return tradeDate;
 	}
-	public void setTradeDate(Timestamp tradeDate) {
+	public void setTradeDate(Date tradeDate) {
 		this.tradeDate = tradeDate;
 	}
 	public String getSecurity() {
@@ -118,10 +118,10 @@ public class Trade {
 	public void setCreationName(String creationName) {
 		this.creationName = creationName;
 	}
-	public Timestamp getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Timestamp creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	public String getRevisionName() {
@@ -130,10 +130,10 @@ public class Trade {
 	public void setRevisionName(String revisionName) {
 		this.revisionName = revisionName;
 	}
-	public Timestamp getRevisionDate() {
+	public Date getRevisionDate() {
 		return revisionDate;
 	}
-	public void setRevisionDate(Timestamp revisionDate) {
+	public void setRevisionDate(Date revisionDate) {
 		this.revisionDate = revisionDate;
 	}
 	public String getDealName() {
