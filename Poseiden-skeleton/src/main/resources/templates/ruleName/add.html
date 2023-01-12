@@ -15,10 +15,27 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of RuleName, there are 2 buttons: Save data and Cancel to the list RuleName
-			 -->
-
+			<label for="name">name</label>
+        	<input id="name" type="text" placeholder="name" th:field="*{name}" required>
+        
+            <label for="description">description</label>
+            <input id="description" type="text" placeholder="description" th:field="*{description}">
+            
+			<label for="json">json</label>
+            <input id="json" type="text" placeholder="json" th:field="*{json}">
+            
+            <label for="template">template</label>
+            <input id="template" type="text" placeholder="template" th:field="*{template}">
+            
+            <label for="sqlStr">sql</label>
+            <input id="sqlStr" type="text" placeholder="sqlStr" th:field="*{sqlStr}">
+            
+            <label for="sqlPart">sqlPart</label>
+            <input id="sqlPart" type="text" placeholder="sqlPart" th:field="*{sqlPart}">
+            
+            
+            <input class="btn btn-primary btn-sm" type="submit" value="Add RuleName"/>
+            <a class="btn btn-danger btn-sm"th:href="@{/ruleName/list}">Cancel</a>
 		</form>
 	</div>
 

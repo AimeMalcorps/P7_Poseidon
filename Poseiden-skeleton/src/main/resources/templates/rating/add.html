@@ -15,10 +15,21 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of Rating, there are 2 buttons: Save data and Cancel to the list Rating
-			 -->
-
+        
+            <label for="moodysRating">MoodysRating</label>
+            <input id="moodysRating" type="text" placeholder="MoodysRating" th:field="*{moodysRating}">
+            
+			<label for="sandPRating">SandPRating</label>
+            <input id="sandPRating" type="text" placeholder="SandPRating" th:field="*{sandPRating}">
+            
+              <label for="fitchRating">FitchRating</label>
+            <input id="fitchRating" type="text" placeholder="FitchRating" th:field="*{fitchRating}">
+            
+              <label for="orderNumber">Order</label>
+            <input id="orderNumber" type="text" placeholder="Order" th:field="*{orderNumber}">
+            
+            <input class="btn btn-primary btn-sm" type="submit" value="Add Rating"/>
+            <a class="btn btn-danger btn-sm" th:href="@{/rating/list}">Cancel</a>
 		</form>
 	</div>
 

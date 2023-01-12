@@ -15,9 +15,20 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/update/{id}(id=${rating.id})}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of Rating, there are 2 buttons: Update data and Cancel to the Rating
-			 -->
+			<label for="moodysRating">MoodysRating</label>
+        	<input id="moodysRating" type="text" placeholder="MoodysRating" th:field="*{moodysRating}" required>
+        
+            <label for="sandPRating">SandPRating</label>
+            <input id="sandPRating" type="text" placeholder="type" th:field="*{sandPRating}">
+            
+			<label for="fitchRating">FitchRating</label>
+            <input id="fitchRating" type="text" placeholder="fitchRating" th:field="*{fitchRating}">
+            
+            <label for="orderNumber">Order</label>
+            <input id="orderNumber" type="text" placeholder="orderNumber" th:field="*{orderNumber}">
+            
+            <input class="btn btn-primary btn-sm" type="submit" value="Update Rating"/>
+            <a class="btn btn-danger btn-sm" th:href="@{/rating/list}">Cancel</a>
 		</form>
 	</div>
 
