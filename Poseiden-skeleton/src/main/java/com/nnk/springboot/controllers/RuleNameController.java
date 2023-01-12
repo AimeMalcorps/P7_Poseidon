@@ -1,6 +1,11 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.RuleName;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,18 +13,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.repositories.RuleNameRepository;
+import com.nnk.springboot.services.RuleNameService;
 
 @Controller
 public class RuleNameController {
-    // TODO: Inject RuleName service
+	
+	@Autowired
+	private RuleNameService ruleNameService;
+	
+	@Autowired
+	private RuleNameRepository ruleNameRepo;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
-        // TODO: find all RuleName, add to model
-        return "ruleName/list";
+    public ModelAndView home(Model model) {
+    	ModelAndView mav = new ModelAndView();
+		mav.addObject("ruleName", ruleNameRepo.findAll());
+		mav.setViewName("/ruleName/list");
+		mav.setStatus(HttpStatus.OK);
+		return mav;
     }
 
     @GetMapping("/ruleName/add")
@@ -28,27 +43,53 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/validate")
-    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return RuleName list
-        return "ruleName/add";
+    public ModelAndView validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+    	ModelAndView mav = new ModelAndView();
+		if (ruleNameService.createRuleName(ruleName)) {
+			mav.setStatus(HttpStatus.OK);
+		} else {
+			mav.setStatus(HttpStatus.BAD_REQUEST);
+		}
+		mav.addObject("ruleName", ruleNameRepo.findAll());
+		mav.setViewName("ruleName/list");
+		
+        return mav;
     }
 
     @GetMapping("/ruleName/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
-        return "ruleName/update";
+    public ModelAndView showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    	ModelAndView mav = new ModelAndView();
+    	Optional<RuleName> ruleName = ruleNameRepo.findById(id);
+    	if (ruleName != null) {
+    		RuleName ruleNameToUpdate = ruleName.get();
+    		mav.addObject("ruleName", ruleNameToUpdate);
+    		mav.setViewName("ruleName/update");
+    		mav.setStatus(HttpStatus.OK);
+    	} else {
+    		mav.setViewName("ruleName/list");
+    		mav.setStatus(HttpStatus.BAD_REQUEST);
+    	}
+        return mav;
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
+    public ModelAndView updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-        return "redirect:/ruleName/list";
+    	ModelAndView mav = new ModelAndView();
+		if (ruleNameService.updateRuleName(id, ruleName)) {
+			mav.setStatus(HttpStatus.OK);
+		} else {
+			mav.setStatus(HttpStatus.BAD_REQUEST);
+		}
+		mav.addObject("ruleName", ruleNameRepo.findAll());
+		mav.setViewName("/ruleName/list");
+		
+        return mav;
     }
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+    	ruleNameRepo.deleteById(id);
         return "redirect:/ruleName/list";
     }
 }
